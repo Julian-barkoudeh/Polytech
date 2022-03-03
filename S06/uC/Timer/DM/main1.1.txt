@@ -1,0 +1,21 @@
+int main()
+	{
+		// Configuration horloge du systeme
+		SystemClock_Config();
+		//Initialisation signal PWM
+		BSP_LED_Init();
+		BSP_TIMER_Timebase_Init();
+		uint8_t TIM6_counter;
+		uint8_t TIM6_UIF;
+		while(1){
+			TIM6_counter = TIM6->CNT;
+			if(TIM6->SR == 1){
+				if(TIM6_UIF == 0){
+					TIM6_UIF = 1024;
+				}
+				else if(TIM6_UIF == 1024){
+					TIM6_UIF = 0;
+				}
+				TIM6->SR = 0;
+			}
+		}

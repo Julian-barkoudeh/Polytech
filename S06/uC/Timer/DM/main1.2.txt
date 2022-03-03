@@ -1,0 +1,15 @@
+int main() {
+	// Configuration horloge du systeme
+	SystemClock_Config();
+	// Initialisation Pin pour LED verte
+	BSP_LED_Init();
+	// Initialisation et lancement du Timer
+	BSP_DELAY_TIM_init();
+	// Boucle infinie
+	while(1) {
+		// Change etat de la LED verte
+		BSP_LED_Toggle();
+		// attendre 200 ms
+		BSP_DELAY_TIM_ms(200);
+	}
+}

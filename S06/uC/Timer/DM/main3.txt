@@ -1,0 +1,8 @@
+int main()
+	{
+		// Configuration horloge du systeme
+		SystemClock_Config();
+		//Initialisation signal PWM
+		BSP_PWM_Init();
+		while(1);
+}

@@ -1,0 +1,245 @@
+int main(void)
+{
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser la console de debogage
+	BSP_Console_Init();
+	mon_printf("\r\n La est Console Ready!\r\n");
+	mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	// Demarrer la transaction I2C
+	I2C1->CR2 |= I2C_CR2_START;
+	// <-- Mettre un Point arret ici
+	while(1) {
+	}
+}
+
+
+int main(void)
+{
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser les pins de debug
+	BSP_DBG_Pins_Init();
+	// Initialiser la console de debogage
+	BSP_Console_Init();
+	mon_printf("\r\n La est Console Ready!\r\n");
+	mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	// Adresse du composant VEML7700 (SLAVE) est 0x10
+	I2C1->CR2 &= ~I2C_CR2_SADD_Msk;
+	I2C1->CR2 |= ((0x10 <<1U) <<I2C_CR2_SADD_Pos);
+	// Transfert avec NBYTES=1, pas de AUTOEND
+	I2C1->CR2 &= ~I2C_CR2_NBYTES;
+	I2C1->CR2 |= (1 <<16U);
+	I2C1->CR2 &= ~I2C_CR2_AUTOEND;
+	// Demarrer la transaction I2C
+	I2C1->CR2 |= I2C_CR2_START; // <-- Mettre un Point arret ici
+	wait_for_flags();
+	I2C1->TXDR = 0x00;
+	wait_for_flags();
+	while(1)
+	{
+	}
+}
+
+int main(void)
+{
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser les pins de debug
+	BSP_DBG_Pins_Init();
+	// Initialiser la console de debogage
+	BSP_Console_Init();
+	mon_printf("\r\n La est Console Ready!\r\n");
+	mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	// Adresse du composant VEML7700 (SLAVE) est 0x10
+	I2C1->CR2 &= ~I2C_CR2_SADD_Msk;
+	I2C1->CR2 |= ((0x10 <<1U) <<I2C_CR2_SADD_Pos);
+	// Transfert avec NBYTES=1, pas de AUTOEND
+	I2C1->CR2 &= ~I2C_CR2_NBYTES;
+	I2C1->CR2 |= (1 <<16U);
+	I2C1->CR2 &= ~I2C_CR2_AUTOEND;
+	// Demarrer la transaction I2C
+	I2C1->CR2 |= I2C_CR2_START; // <-- Mettre un Point arret ici
+	wait_for_flags();
+	I2C1->TXDR = 0x00;
+	wait_for_flags();
+	while(1)
+	{
+	}
+}
+
+static uint8_t wait_for_flags()
+{
+	uint8_t exit = 0;
+	while(exit == 0)
+	{
+		// TXIS -> PA0
+		// Quitter attente si TXIS passe a '1'
+		if ((I2C1->ISR & I2C_ISR_TXIS) != 0)
+		{
+			GPIOA->BSRR = GPIO_BSRR_BS_0; // mise a '1' de PA0
+			exit = 1;
+		}
+		else GPIOA->BSRR = GPIO_BSRR_BR_0; // mise a '0' de PA0
+		// Ajouter autres sortie de drapeaux
+		// ...
+		// TC-> PA1
+		// Quitter attente si RXNE passe a '1'
+		if ((I2C1->ISR & I2C_ISR_TC) != 0) {
+			GPIOA->BSRR = GPIO_BSRR_BS_1;
+			// mise a '1' de PA1
+			exit = 1;
+		}
+		else GPIOA->BSRR = GPIO_BSRR_BR_1; // mise a '0' de PA1
+		// RXNE-> PA1
+		// Quitter attente si RXNE passe a '1'
+		if ((I2C1->ISR & I2C_ISR_RXNE) != 0)
+		{
+			GPIOA->BSRR = GPIO_BSRR_BS_1;
+			// mise a '1' de PA1
+			exit = 1;
+		}
+		else GPIOA->BSRR = GPIO_BSRR_BR_1; // mise a '0' de PA1
+	}
+	return exit;
+}
+
+
+
+int main(void)
+{
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser les pins de debug
+	BSP_DBG_Pins_Init();
+	// Initialiser la console de debogage
+	//BSP_Console_Init();
+	mon_printf("\r\n La est Console Ready!\r\n");
+	//mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	// Adresse du composant VEML7700 (SLAVE) est 0x10
+	I2C1->CR2 &= ~I2C_CR2_SADD_Msk;
+	I2C1->CR2 |= ((0x10 <<1U) <<I2C_CR2_SADD_Pos);
+	// Transfert avec NBYTES=1, pas de AUTOEND
+	I2C1->CR2 &= ~I2C_CR2_NBYTES;
+	I2C1->CR2 |= (1 <<16U); I2C1->CR2 &= ~I2C_CR2_AUTOEND;
+	// Demarrer la transaction I2C
+	I2C1->CR2 |= I2C_CR2_START; // <-- Mettre un Point arret ici
+	wait_for_flags();
+	// attente de TXIS
+	//TXIS a été activé, passez à l'envoi du code de commande.
+	I2C1->TXDR = 0x00;
+	wait_for_flags();
+	// attente de TC
+	// Mettre l'I2C en mode lecture
+	I2C1->CR2 |= I2C_CR2_RD_WRN;
+	// Relancer la transaction
+	I2C1->CR2 |= I2C_CR2_START;
+	wait_for_flags();
+	// attente RXNE
+	// Generer une condition STOP
+	I2C1->CR2 |= I2C_CR2_STOP;
+	while(1) {
+	}
+}
+
+
+int main(void)
+{
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser les pins de debug
+	BSP_DBG_Pins_Init();
+	// Initialiser la console de debogage
+	BSP_Console_Init();
+	//mon_printf("\r\n La est Console Ready!\r\n");
+	//mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	// Adresse du composant VEML7700 (SLAVE) est 0x10
+	I2C1->CR2 &= ~I2C_CR2_SADD_Msk;
+	I2C1->CR2 |= ((0x10 <<1U) <<I2C_CR2_SADD_Pos);
+	// Transfert avec NBYTES=1, pas de AUTOEND
+	I2C1->CR2 &= ~I2C_CR2_NBYTES;
+	I2C1->CR2 |= (1 <<16U);
+	I2C1->CR2 &= ~I2C_CR2_AUTOEND;
+	// Demarrer la transaction I2C
+	I2C1->CR2 |= I2C_CR2_START; // <-- Mettre un Point arret ici
+	wait_for_flags();
+	// attente de TXIS
+	//TXIS a été activé, passez à l'envoi du code de commande.
+	I2C1->TXDR = 0x00;
+	wait_for_flags();
+	// attente de TC
+	// Mettre l'I2C en mode lecture
+	I2C1->CR2 |= I2C_CR2_RD_WRN;
+	// Transfert avec NBYTES=1, pas de AUTOEND
+	I2C1->CR2 &= ~I2C_CR2_NBYTES;
+	I2C1->CR2 |= (2 <<16U);
+	I2C1->CR2 &= ~I2C_CR2_AUTOEND;
+	// Relancer la transaction
+	I2C1->CR2 |= I2C_CR2_START;
+	wait_for_flags();
+	// attente RXNE
+	// Lecture du premier octet (LSB)
+	rx_data = I2C1->RXDR;
+	wait_for_flags();
+	// attente RXNE
+	// Lecture du deuxième octet (MSB)
+	rx_data += (I2C1->RXDR <<8U);
+	// Generer une condition STOP
+	I2C1->CR2 |= I2C_CR2_STOP;
+	while(1) {
+	}
+}
+
+
+static void SystemClock_Config(void);
+static uint8_t wait_for_flags();
+uint16_t rx_data[2];
+int main(void) {
+	// Configurer horloge du systeme pour 48MHz a partir de la source 8MHz HSE
+	SystemClock_Config();
+	// Initialiser la LED et le bouton bleu
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser les pins de debug
+	BSP_DBG_Pins_Init();
+	// Initialiser la console de debogage
+	BSP_Console_Init();
+	mon_printf("\r\n La est Console Ready!\r\n");
+	mon_printf("SYSCLK = %d Hz\r\n", SystemCoreClock);
+	// Initialiser le périphérique I2C1
+	BSP_I2C1_Init();
+	//Lire 2 octets dans le registre VEML7700 @0x00
+	BSP_I2C1_Read(0x10, 0x00, rx_data, 2);
+	// envoi des data aux pc
+	mon_printf( "configuration actuelle du VEML7700 = 0x%04x\r\n", (uint16_t)(rx_data[1] <<8U | rx_data[0]) );
+	while(1) {
+	}
+}
+
+
+

@@ -1,0 +1,209 @@
+/*
+ *  bsp.c
+ * Created on: 14 févr. 2021 * Author: darga
+ */
+
+#include "bsp.h"
+/*
+ * BSP_LED_Init()
+ * Initialise la broche PA5 (LED) en sortie, mode Push-pull, vitesse de rafraichissement High-Speed, pas de resistance de tirage
+ * Etat initial mus a '0'
+ */
+void BSP_LED_Init()
+{
+	//activation de horloge du peripherique GPIOA
+	// mettre le bit b17 du registre RCC_AHBENR a '1'
+	// voir page 128 du manuel technique (User Manuel) du Microcontrôleur STM32F072RB
+	// le bit b17 de RCC_AHBENR est egalement defini = RCC_AHBENR_GPIOAEN dans le fichier stm32f0xx.h
+	RCC->AHBENR |= (1<<17);
+	// ou
+	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
+
+	// Configurer la broche PA5 en sortie
+	// Ecrire "01" sur les bits b11b10 du registre (GPIOA_MODER)
+	GPIOA->MODER &= ~(1<<11); GPIOA->MODER |= (1<<10);
+	// Choisir option electronique Push-pull pour la sortie PA5
+	// Ecrire "0" sur le bit b5 du registre (GPIOA_OTYPER)
+	GPIOA->OTYPER &= ~(1<<5);
+	// Choisir option electronique high speed pour la vitesse de rafraichissement pour la sortie PA5
+	// Ecrire "11" sur les bits b11b10 du registre (GPIOx_OSPEEDR)
+	GPIOA->OSPEEDR |= (1<<11); GPIOA->OSPEEDR |= (1<<10);
+	// Deactiver les resistances de tirages (Pull-up ou Pull-down) pour la sortie PA5
+	// Ecrire "00" sur les bits b11b10 du registre (GPIOx_PUPDR)
+	GPIOA->PUPDR &= ~(1<<11);
+	GPIOA->PUPDR &= ~(1<<10);
+	// Mettre l'état initial de PA5 sur OFF
+	GPIOA->ODR &= ~(1<<5);
+}
+/*
+* BSP_LED_On()
+* Allume la LED lier a la broche PA5
+*/
+void BSP_LED_On()
+{
+	// Ecrire "1" sur le bit b5 du registre (GPIOA_ODR)
+	GPIOA->ODR |= (1<<5);
+}
+/*
+ * BSP_LED_Off()
+ * Eteint la LED lier a la broche PA5
+ */
+void BSP_LED_Off()
+{
+	// Ecrire "0" sur le bit b5 du registre (GPIOA_ODR)
+	GPIOA->ODR &= ~(1<<5);
+}
+/*
+  BSP_LED_Toggle() * Change etat de la LED lier a la broche PA5 */
+void BSP_LED_Toggle()
+{
+	GPIOA->ODR ^= (1<<5);
+}
+
+/*
+ * BSP_PB_Init()
+ * Initialise la broche PC13 (Bouton poussoir) en input sans les resistance de tirages Pull-up/Pull-down
+ */
+void BSP_PB_Init_PA5()
+{
+	//activation de horloge du peripherique GPIOC
+	// mettre le bit b19 du registre RCC_AHBENR a '1'
+	RCC->AHBENR |= (1<<19);
+
+	// Configurer la broche PC13 en Input
+	// Ecrire "00" sur les bits b27b26 du registre (GPIOC_MODER)
+	GPIOC->MODER &= ~(1<<27);
+	GPIOC->MODER &= ~(1<<26);
+	// Deactiver les resistances de tirages (Pull-up ou Pull-down) pour la sortie PA5
+	// Ecrire "00" sur les bits b27b26 du registre (GPIOC_PUPDR)
+	GPIOC->PUPDR &= ~(1<<27);
+	GPIOC->PUPDR &= ~(1<<26);
+	/*
+	 * BSP_PB_GetState()
+	 * Renvoi etat du bouton (0=Non Appuyer, 1=Appuyer)
+	 */
+}
+/*------------------------------
+ * Fonctions pour PB3
+ */
+void BSP_PB_Init_PB3()
+{
+	//activation de horloge du peripherique GPIOC
+	// mettre le bit b19 du registre RCC_AHBENR a '1'
+	RCC->AHBENR |= (1<<18);
+
+	// Configurer la broche PC13 en Input
+	// Ecrire "00" sur les bits b27b26 du registre (GPIOC_MODER)
+	GPIOB->MODER &= ~(1<<7);
+	GPIOB->MODER &= ~(1<<6);
+	// Deactiver les resistances de tirages (Pull-up ou Pull-down) pour la sortie PB3
+	GPIOB->OTYPER &= ~(1<<3);
+	// Ecrire "00" sur les bits b27b26 du registre (GPIOC_PUPDR)
+	GPIOB->OSPEEDR &= ~(1<<7);
+	GPIOB->OSPEEDR &= ~(1<<6);
+	GPIOB->PUPDR &= ~(1<<7);
+	GPIOB->PUPDR &= ~(1<<6);
+	GPIOB->ODR &= ~(1<<3);
+	/*
+	 * BSP_PB_GetState()
+	 * Renvoi etat du bouton (0=Non Appuyer, 1=Appuyer)
+	 */
+}
+uint8_t BSP_PB_GetState()
+	{
+		uint8_t state;
+
+	if ((GPIOC->IDR & (1<<13)) == (1<<13))
+	{
+		state = 0;
+	}
+	else{
+		state = 1;
+	}
+	return state;
+}
+
+/*
+* BSP_LED_On()
+* Allume la LED lier a la broche PB3
+*/
+void BSP_LED_On_PB3()
+{
+	// Ecrire "1" sur le bit b5 du registre (GPIOA_ODR)
+	GPIOB->ODR |= (1<<3);
+}
+/*
+ * BSP_LED_Off()
+ * Eteint la LED lier a la broche PB3
+ */
+void BSP_LED_Off_PB3()
+{
+	// Ecrire "0" sur le bit b5 du registre (GPIOA_ODR)
+	GPIOB->ODR &= ~(1<<3);
+}
+/*
+  BSP_LED_Toggle() * Change etat de la LED lier a la broche PA5 */
+void BSP_LED_Toggle_PB3()
+{
+	GPIOB->ODR ^= (1<<3);
+}
+
+/*
+ * BSP_PB_Init()
+ * Initialise la broche PC18 (Bouton poussoir) en input sans les resistance de tirages Pull-up/Pull-down
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+uint8_t temp = BSP_PB_GetState();
+	// Configure System Clock
+	SystemClock_Config();
+	// Initialize LED pin
+	BSP_LED_Init_PB3();
+	// Initialize User-Button pin
+	BSP_PB_Init();
+	// Turn LED On
+	BSP_LED_On_PB3();
+	// Turn LED Off
+	BSP_LED_Off_PB3();
+	while(1)
+	{
+		// Turn LED On if User-Button is pushed down
+		if (BSP_PB_GetState() == 0 && temp ==1) {
+			BSP_LED_On_PB3();
+			// Otherwise turn LED Off
+
+		}
+		else {
+			BSP_LED_Off_PB3();
+		}
+		temp =BSP_PB_GetState();
+	}
+}

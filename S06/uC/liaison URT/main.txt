@@ -1,0 +1,42 @@
+int main()
+{
+	uint8_t i, envoi;
+
+	// configuration de horloges du system
+	SystemClock_Config();
+	// Initialiser les broches pour LED et Bouton
+	BSP_LED_Init();
+	BSP_PB_Init();
+	// Initialiser la liason serie : Console de Debug
+	BSP_Console_Init();
+	// test du printf
+	j_printf("La Console est ready!\r\n");
+	envoi = 0;
+	i = 0;
+	// Boucle Infini
+	while(1)
+	{
+		// Si le bouton bleu est appuyer i
+		if (BSP_PB_GetState() == 1)
+		{
+			BSP_LED_On(); // Allumer la led verte
+
+		// Envoyer le caractere '#i' une seule fois
+			if (envoi == 0)
+			{
+				j_printf("#%d\r\n", i);
+				//mise a '1' du drapeau envoi
+				envoi = 1;
+				i++;
+			}
+		}
+		// Si le bouton est non appuyer
+		else
+		{
+			BSP_LED_Off();
+			// eteindre la led verte
+			envoi = 0;
+			// mettre le drapeau envoi a '0' : pas envoi
+		}
+	}
+}

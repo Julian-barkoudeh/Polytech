@@ -1,0 +1,11 @@
+.\stm32f0xx_it.o: src\stm32f0xx_it.c
+.\stm32f0xx_it.o: .\inc\main.h
+.\stm32f0xx_it.o: .\inc\stm32f0xx.h
+.\stm32f0xx_it.o: .\inc\stm32f072xb.h
+.\stm32f0xx_it.o: .\inc\core_cm0.h
+.\stm32f0xx_it.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\stm32f0xx_it.o: .\inc\cmsis_version.h
+.\stm32f0xx_it.o: .\inc\cmsis_compiler.h
+.\stm32f0xx_it.o: .\inc\cmsis_armcc.h
+.\stm32f0xx_it.o: .\inc\system_stm32f0xx.h
+.\stm32f0xx_it.o: .\inc\stm32f0xx_it.h

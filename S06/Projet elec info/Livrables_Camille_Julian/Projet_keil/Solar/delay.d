@@ -1,0 +1,10 @@
+.\delay.o: src\delay.c
+.\delay.o: .\inc\delay.h
+.\delay.o: .\inc\stm32f0xx.h
+.\delay.o: .\inc\stm32f072xb.h
+.\delay.o: .\inc\core_cm0.h
+.\delay.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\delay.o: .\inc\cmsis_version.h
+.\delay.o: .\inc\cmsis_compiler.h
+.\delay.o: .\inc\cmsis_armcc.h
+.\delay.o: .\inc\system_stm32f0xx.h

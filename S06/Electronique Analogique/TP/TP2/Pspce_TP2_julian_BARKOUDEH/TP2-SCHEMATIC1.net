@@ -1,0 +1,7 @@
+* source TP2
+V_V3         E 0 DC 0Vdc AC 2.5Vac 
+R_R1         S 0  10k  
+E_LAPLACE2         S 0 LAPLACE {V(S1)} {(1)/(1 + (s/6283.18)*0.7653 +
++  (s/6283.18)**2)}
+E_LAPLACE1         S1 0 LAPLACE {V(E)} {(0.999)/(1 + (s/6283.18)*1.8478 +
++  (s/6283.18)**2)}

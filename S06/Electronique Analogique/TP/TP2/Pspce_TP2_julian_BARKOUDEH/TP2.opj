@@ -1,0 +1,75 @@
+(ExpressProject "TP2"
+  (ProjectVersion "19981106")
+  (ProjectType "Analog or A/D Mixed Mode")
+  (Folder "Design Resources"
+    (Folder "Library")
+    (NoModify)
+    (File ".\tp2.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Outputs"
+    (File ".\tp2-schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (ActiveProfile ".\tp2-schematic1-sim1.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\tp2-schematic1-sim1.sim"
+        (DisplayName "SCHEMATIC1-sim1")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User))
+    (Folder "Stimulus Files"
+      (Sort User))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (VAC
+      (FullPartName "VAC.Normal")
+      (LibraryName
+         "D:\ECOLE\EI-2I-3-S6\ELECTRONIQUE ANALOGIQUE\LIBRAIRIES PSPICE VERSION INDUS\SOURCE.OLB")
+      (DeviceIndex "0"))
+    (R
+      (FullPartName "R.Normal")
+      (LibraryName
+         "D:\ECOLE\EI-2I-3-S6\ELECTRONIQUE ANALOGIQUE\LIBRAIRIES PSPICE VERSION INDUS\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (LAPLACE
+      (FullPartName "LAPLACE.Normal")
+      (LibraryName
+         "D:\ECOLE\EI-2I-3-S6\ELECTRONIQUE ANALOGIQUE\LIBRARY_PSPICE_PH\PSPICE\ABM.OLB")
+      (DeviceIndex "0"))
+    (0
+      (LibraryName
+         "C:\PROGRAM FILES\ORCADLITE\CAPTURE\LIBRARY\PSPICE\SOURCE.OLB")
+      (DeviceIndex "0"))
+    (VCC
+      (LibraryName "C:\PROGRAM FILES\ORCADLITE\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (VCC_WAVE
+      (LibraryName "C:\PROGRAM FILES\ORCADLITE\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0")))
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Outputs"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 563"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 52 1046 52 624")
+        (Scroll "0 0")
+        (Zoom "118")
+        (Occurrence "/"))
+      (Path
+         "D:\ECOLE\EI-2I-3-S6\ELECTRONIQUE ANALOGIQUE\TP\TP2\PSPCE_TP2_JULIAN_BARKOUDEH\TP2.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE1"))))

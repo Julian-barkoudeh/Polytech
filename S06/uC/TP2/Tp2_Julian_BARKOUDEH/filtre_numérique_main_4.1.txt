@@ -1,0 +1,87 @@
+uint8_t timebase_irq = 0;
+uint16_t in, out;
+uint8_t button_irq;
+int main(void)
+{
+	float c1, c2; // les coef du filtre
+	float x = 0; // Entree (Input) du Filtre
+	float y = 0; // Sortie (Output) du filtre
+	// configuration des coefs du filtre
+	c1 = 0.11765f;
+	c2 = 0.88235f;
+	// Configure System Clock for 48MHz from 8MHz HSE
+	SystemClock_Config();
+	//Initialisation de la Led verte
+	BSP_LED_Init();
+	// initialisation de la base de temps de 10 ms
+	BSP_TIMER_Timebase_Init();
+	BSP_NVIC_Init();
+	// Initialisation de ADC
+	BSP_ADC_Init();
+	// Initialisation de DAC
+	BSP_DAC_Init();
+	while(1)
+	{
+		// Executer tout les 10 ms
+		if (timebase_irq == 1)
+		{
+			// Demmarrer la mesure de performance
+			BSP_LED_On();
+			// Lecture entree ADC
+			while ( (ADC1->ISR & ADC_ISR_EOC) != ADC_ISR_EOC );
+			in = ADC1->DR;
+			// etage de filtrage
+			x = in;
+			y = (c1*x) + (c2*y);
+			out = (uint16_t)y;
+			// envoi de la donnee sur la sortie DAC
+			DAC->DHR12R1 = out;
+			// Arret la mesure de performance
+			BSP_LED_Off();
+			timebase_irq = 0;
+		}
+	}
+}uint8_t timebase_irq = 0;
+uint16_t in, out;
+uint8_t button_irq;
+int main(void)
+{
+	float c1, c2; // les coef du filtre
+	float x = 0; // Entree (Input) du Filtre
+	float y = 0; // Sortie (Output) du filtre
+	// configuration des coefs du filtre
+	c1 = 0.11765f;
+	c2 = 0.88235f;
+	// Configure System Clock for 48MHz from 8MHz HSE
+	SystemClock_Config();
+	//Initialisation de la Led verte
+	BSP_LED_Init();
+	// initialisation de la base de temps de 10 ms
+	BSP_TIMER_Timebase_Init();
+	BSP_NVIC_Init();
+	// Initialisation de ADC
+	BSP_ADC_Init();
+	// Initialisation de DAC
+	BSP_DAC_Init();
+	while(1)
+	{
+		// Executer tout les 10 ms
+		if (timebase_irq == 1)
+		{
+			// Demmarrer la mesure de performance
+			BSP_LED_On();
+			// Lecture entree ADC
+			while ( (ADC1->ISR & ADC_ISR_EOC) != ADC_ISR_EOC );
+			in = ADC1->DR;
+			// etage de filtrage
+			x = in;
+			y = (c1*x) + (c2*y);
+			out = (uint16_t)y;
+			// envoi de la donnee sur la sortie DAC
+			DAC->DHR12R1 = out;
+			// Arret la mesure de performance
+			BSP_LED_Off();
+			timebase_irq = 0;
+		}
+	}
+}

@@ -1,0 +1,36 @@
+uint8_t timebase_irq = 0;
+uint16_t in, out;
+uint8_t button_irq;
+int main(void)
+{
+	// Configure System Clock for 48MHz from 8MHz HSE
+	SystemClock_Config();
+	//Initialisation de la Led verte
+	BSP_LED_Init();
+	// initialisation de la base de temps de 10 ms
+	BSP_TIMER_Timebase_Init();
+	BSP_NVIC_Init();
+	// Initialisation de ADC
+	BSP_ADC_Init();
+	// Initialisation de DAC
+	BSP_DAC_Init();
+	while(1)
+	{
+		// Executer tout les 10 ms
+		if (timebase_irq == 1)
+		{
+			// Demmarrer la mesure de performance
+			BSP_LED_On();
+			// Lecture entree ADC
+			while ( (ADC1->ISR & ADC_ISR_EOC) != ADC_ISR_EOC );
+			in = ADC1->DR;
+			// etage de suivi : copie de entree ADC sur la sortie DAC
+			out = in;
+			// envoi de la donnee sur la sortie DAC
+			DAC->DHR12R1 = out;
+			// Arret la mesure de performance
+			BSP_LED_Off();
+			timebase_irq = 0;
+		}
+	}
+}

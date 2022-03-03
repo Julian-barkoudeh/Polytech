@@ -1,0 +1,29 @@
+int main(void)
+{
+	// Configuration horloge du systeme : 48MHz avec 8MHz HSE
+	SystemClock_Config();
+	//Initialisation de pin PC13 pour bouton Bleu avec interruption
+	BSP_PB_IT_Init();
+	// Initialisation USART pour console liaison serie
+	BSP_Console_Init();
+	// test console : message accueil
+	j_printf("La Console est Ready!\r\n");
+	//Initialisation de Timer TIM6 pour delai
+	BSP_DELAY_TIM_init();
+	// initialisation du controleur interruption NVIC
+	BSP_NVIC_Init();
+	// boucle principale des applications
+	while(1)
+	{
+	// Traitement de la tache lier a la detection du front descendant du bouton
+	if (button_irq ==1)
+	{
+	j_printf("#");
+	button_irq = 0;
+	}
+	// Exemple de tache importante a faire
+	// envoyer "." au PC par USART et attendre 200 ms
+	j_printf(".");
+	BSP_DELAY_TIM_ms(200);
+	}
+}

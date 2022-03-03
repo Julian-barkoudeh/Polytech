@@ -1,0 +1,37 @@
+int main(void)
+{
+	float angle, y;
+	uint16_t output;
+	// Configurer horloge du Systeme
+	SystemClock_Config();
+	//Initialiser le pin PA5 : LED
+	BSP_LED_Init();
+	//Initialiser le DAC
+	BSP_DAC_Init();
+	//Initialiser le TIM6 pour debordement chaque 200μs
+	BSP_TIMER_Timebase_Init();
+	// Initialiser la variable angle
+	angle = 0.0f;
+	while(1)
+	{
+		// Commencer la mesure du temps : mise a '1' de pin PA5
+		BSP_LED_On();
+		// Incrementer la valeur de angle value modulo 2*PI
+		angle = angle + 0.01f;
+		if (angle > 6.28f) {
+			angle = 0.0f;
+		}
+		// caculer le sinus(angle)
+		y = sinf(angle);
+		// Offset et mise a echelle pour la sortie du DAC :
+		// le registre du DAC est unsigned 12-bit
+		output = (uint16_t)(0x07FF + (int16_t)(0x07FF * y));
+		// Arreter la mesure du temps : mise a '0' de pin PA5
+		BSP_LED_Off();
+		// Envoyer la valeur calculer le DAC
+		DAC->DHR12R1 = output;
+		// Attendre le debordement du Timer TIM6 : (1 echantillon chaque 200μs)
+		while ((TIM6->SR & TIM_SR_UIF) == 0);
+		TIM6->SR &= ~TIM_SR_UIF;
+	}
+}

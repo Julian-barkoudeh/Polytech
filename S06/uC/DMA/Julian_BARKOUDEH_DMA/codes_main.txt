@@ -1,0 +1,126 @@
+// variable globale
+uint8_t button_irq = 0;
+uint8_t timebase_irq = 0;
+uint8_t console_rx_byte [10];
+uint8_t console_rx_irq;
+uint8_t rx_dma_buffer[8];
+uint8_t rx_dma_irq;
+int main(void)
+{
+// Configuration horloge du systeme : 48MHz avec 8MHz HSE
+SystemClock_Config();
+// Initialisation USART pour console liaison serie
+BSP_Console_Init();
+// test console : message accueil
+mon_printf("La Console est Ready!\r\n");
+// boucle principale des applications
+while(1)
+{
+// Le CPU ne fait rien
+}
+}
+
+
+// variable globale
+uint8_t button_irq = 0;
+uint8_t timebase_irq = 0;
+uint8_t console_rx_byte [10];
+uint8_t console_rx_irq;
+uint8_t rx_dma_buffer[8];
+uint8_t rx_dma_irq;
+int main(void)
+{
+	uint8_t DMA_Counter;
+	uint8_t index;
+	// Configuration horloge du systeme : 48MHz avec 8MHz HSE
+	SystemClock_Config();
+	// Initialisation USART pour console liaison serie
+	BSP_Console_Init();
+	// test console : message accueil
+	mon_printf("La Console est Ready!\r\n");
+	// Initialiser le TIM6 pour generer une interruption toute les 1s
+	BSP_TIMER_Timebase_Init();
+	BSP_NVIC_Init();
+	// Initialiser les variables
+	DMA_Counter = DMA1_Channel5->CNDTR;
+	index = DMA_Counter;
+	// boucle principeale des applications
+	while(1)
+	{
+		// Faire toutes les 1s
+		if (timebase_irq == 1)
+		{
+			//Obtenir la valeur actuelle du compteur DMA
+			DMA_Counter = DMA1_Channel5->CNDTR;
+			//Pour tous les nouveaux octets recus
+			while (index != DMA_Counter)
+			{
+				// Envoyer un octet au PC pour etre afficher sur la console PuTTy
+				while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
+				USART2->TDR = rx_dma_buffer[8-index];
+				// Mise a jour de index du buffer circulaire
+				index--;
+				if (index == 0) index = 8;
+			}
+			// reset du drapeau interruption TIM6
+			timebase_irq = 0;
+		}
+	}
+}
+
+uint8_t button_irq = 0;
+uint8_t timebase_irq = 0;
+uint8_t console_rx_byte [10];
+uint8_t console_rx_irq;
+uint8_t rx_dma_buffer[8];
+uint8_t rx_dma_irq = 0;
+
+int main(void)
+{
+	uint8_t index;
+	// Configuration horloge du systeme : 48MHz avec 8MHz HSE
+	SystemClock_Config();
+	// Initialisation USART pour console liaison serie
+	BSP_Console_Init();
+	// test console : message accueil
+	mon_printf("La Console est Ready!\r\n");
+	// Initialiser le TIM6 pour generer une interruption toute les 1s
+	BSP_TIMER_Timebase_Init();
+	BSP_NVIC_Init();
+	// boucle principeale des applications
+	while(1)
+	{
+	// Faire toutes les 1s
+	if (timebase_irq == 1)
+	{
+		switch(rx_dma_irq)
+		{
+		case 1: // Une interruption de demi transfert (HT) s'est produite
+		{
+		// Affichage des octets [0-3] pour affichage sur la console de PC
+		for (index=0; index<4; index++)
+		{
+		while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
+		USART2->TDR = rx_dma_buffer[index];
+		}
+		rx_dma_irq = 0;
+		break;
+		}
+		case 2: // interruption du transfert complet (TC) s'est produite
+		{
+		// // Envoi des octets [4-7] pour affichage sur la console de PC
+		for (index=4; index<8; index++)
+		{
+		while ( (USART2->ISR & USART_ISR_TC) != USART_ISR_TC);
+		USART2->TDR = rx_dma_buffer[index];
+		}
+		rx_dma_irq = 0;
+		break;
+		}
+		}
+		// reset du drapeau interruption TIM6
+		timebase_irq = 0;
+		}
+		}
+}
+

@@ -1,0 +1,33 @@
+clc 
+clear
+%Tp1
+%Camille DOUZET
+%Julian BARKOUDEH 
+%Partie 2 
+%Variables de la qA à la qC
+te = 0.01;
+%a= 0.25;
+T = 2;
+%E = 5;
+%N= 200;
+%On calcule C0 séparemment, et on obtient C0 = 2aE
+%Variables de la qD (peigne de Dirac)
+a = 0.000010;
+E = 1/(2*0.00001*T);
+x= 2*a*E;
+N = 400;
+t = 0:te:(N-1)*te;
+%Initialisation de P
+p= (2*a*E).^2;
+for n=1:101
+    disp(['nombre harmoniques = ' num2str(n)])
+    x = x + ((2*E/(pi*n))*sin(2*pi*n*a)*cos(2*pi*n*t/T)); 
+    plot(t, x); 
+    p =(x*x')/N; % Calcul de la puissance en domaine temporel
+    disp(['puissance = ' num2str(p)]);
+    if p >= 12.375  % 99% de la puissance (12.5)
+       disp(['rang n pour puissance = ' num2str(n)]);
+       break; 
+    end
+    pause(0.1);
+end

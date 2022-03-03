@@ -1,0 +1,21 @@
+clc 
+clear
+%Tp1
+%Camille DOUZET
+%Julian BARKOUDEH 
+%Question e de la partie 2
+te = 0.01;
+E = 5;
+T = 2;
+tho = T/4;
+N = 200;
+t = 0:te:(N-1)*te;
+%Cacule de la valeur pour 0 
+x= E*tho/T;
+figure();
+for n=1:60
+    disp(['nombre harmoniques = ' num2str(n)])
+    x= x + (2*E*tho/T)*((sin(pi*n*tho/T)/(pi*n*tho/T)).^2)*cos(2*pi*n*t/T);
+    pause(0.1);
+    plot(t, x); 
+end 

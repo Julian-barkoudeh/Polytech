@@ -1,0 +1,92 @@
+Dependencies for Project 'Solar', Target 'Target 1': (DO NOT MODIFY !)
+F (.\inc\bsp.h)(0x60916A34)()
+F (.\inc\cmsis_armcc.h)(0x5FC7DE58)()
+F (.\inc\cmsis_armclang.h)(0x5FC7DE58)()
+F (.\inc\cmsis_compiler.h)(0x5FC7DE58)()
+F (.\inc\cmsis_gcc.h)(0x5FC7DE58)()
+F (.\inc\cmsis_iccarm.h)(0x5FC7DE58)()
+F (.\inc\cmsis_version.h)(0x5FC7DE58)()
+F (.\inc\core_armv8mbl.h)(0x5FC7DE58)()
+F (.\inc\core_armv8mml.h)(0x5FC7DE58)()
+F (.\inc\core_cm0.h)(0x5FC7DE58)()
+F (.\inc\core_cm0plus.h)(0x5FC7DE58)()
+F (.\inc\core_cm1.h)(0x5FC7DE58)()
+F (.\inc\core_cm3.h)(0x5FC7DE58)()
+F (.\inc\core_cm4.h)(0x5FC7DE58)()
+F (.\inc\core_cm7.h)(0x5FC7DE58)()
+F (.\inc\core_cm23.h)(0x5FC7DE58)()
+F (.\inc\core_cm33.h)(0x5FC7DE58)()
+F (.\inc\core_sc000.h)(0x5FC7DE58)()
+F (.\inc\core_sc300.h)(0x5FC7DE58)()
+F (.\inc\delay.h)(0x602A8F1F)()
+F (.\inc\main.h)(0x60916B3E)()
+F (.\inc\mpu_armv7.h)(0x5FC7DE58)()
+F (.\inc\mpu_armv8.h)(0x5FC7DE58)()
+F (.\inc\stm32f0xx.h)(0x601ADC9E)()
+F (.\inc\stm32f0xx_it.h)(0x60916ADA)()
+F (.\inc\stm32f072xb.h)(0x5FC7DE58)()
+F (.\inc\system_stm32f0xx.h)(0x5FC7DE58)()
+F (.\inc\tz_context.h)(0x5FC7DE58)()
+F (.\src\bsp.c)(0x60916A2F)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\bsp.o --omf_browse .\bsp.crf --depend .\bsp.d)
+I (.\inc\bsp.h)(0x60916A34)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+F (.\src\delay.c)(0x6059CE6E)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\delay.o --omf_browse .\delay.crf --depend .\delay.d)
+I (.\inc\delay.h)(0x602A8F1F)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+F (.\src\main.c)(0x60A51F92)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+I (.\inc\bsp.h)(0x60916A34)
+I (.\inc\delay.h)(0x602A8F1F)
+I (.\inc\main.h)(0x60916B3E)
+F (.\src\printf-stdarg.c)(0x608FA6CD)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\printf-stdarg.o --omf_browse .\printf-stdarg.crf --depend .\printf-stdarg.d)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdarg.h)(0x51C827C4)
+F (.\src\stm32f0xx_it.c)(0x60A50124)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\stm32f0xx_it.o --omf_browse .\stm32f0xx_it.crf --depend .\stm32f0xx_it.d)
+I (.\inc\main.h)(0x60916B3E)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+I (.\inc\stm32f0xx_it.h)(0x60916ADA)
+F (.\src\system_stm32f0xx.c)(0x5FC7DE58)(--c99 -c --cpu Cortex-M0 -D__EVAL -g -O0 --apcs=interwork -I.\inc-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx-DSTM32F072-o .\system_stm32f0xx.o --omf_browse .\system_stm32f0xx.crf --depend .\system_stm32f0xx.d)
+I (.\inc\stm32f0xx.h)(0x601ADC9E)
+I (.\inc\stm32f072xb.h)(0x5FC7DE58)
+I (.\inc\core_cm0.h)(0x5FC7DE58)
+I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x51C827C4)
+I (.\inc\cmsis_version.h)(0x5FC7DE58)
+I (.\inc\cmsis_compiler.h)(0x5FC7DE58)
+I (.\inc\cmsis_armcc.h)(0x5FC7DE58)
+I (.\inc\system_stm32f0xx.h)(0x5FC7DE58)
+F (.\startup_stm32f072.s)(0x532C639C)(--cpu Cortex-M0 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32F0xx--list .\startup_stm32f072.lst --xref -o .\startup_stm32f072.o --depend .\startup_stm32f072.d)

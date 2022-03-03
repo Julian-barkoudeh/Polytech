@@ -1,0 +1,11 @@
+--cpu Cortex-M0
+".\bsp.o"
+".\delay.o"
+".\main.o"
+".\printf-stdarg.o"
+".\stm32f0xx_it.o"
+".\system_stm32f0xx.o"
+".\startup_stm32f072.o"
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Solar.map" -o .\Solar.axf
